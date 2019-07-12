@@ -18,3 +18,9 @@ test:
   stage: test
   script:
     - mvn $MAVEN_CLI_OPTS test
+
+package:
+  stage: package
+  script:
+    - mvn $MAVEN_CLI_OPTS package docker:build
+
