@@ -13,6 +13,7 @@ build:
   stage: build
   script:
     - mvn $MAVEN_CLI_OPTS compile
+    - mvn $MAVEN_CLI_OPTS package docker:build
 
 test:
   stage: test
