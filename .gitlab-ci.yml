@@ -13,7 +13,7 @@ build:
   stage: build
   script:
     - mvn $MAVEN_CLI_OPTS compile
-    - docker build -t my-image .
+    - docker build -t hello-image .
 
 test:
   stage: test
