@@ -13,6 +13,7 @@ build:
   stage: build
   script:
     - mvn $MAVEN_CLI_OPTS package
+    - cat Dockerfile
     - sudo docker build -t hello-image .
 
 test:
