@@ -34,7 +34,7 @@ public class DemoApplication {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		return "Gary's Hello World Spring is here! 0716 2100 Server works at " + address + ":" +serverPort + "\n " + request.getRemoteAddr();
+		return "Gary's Hello World Spring is here! 0716 2100 Server works at " + address + ":" +serverPort + "\n  " + request.getRemoteAddr();
 
 	}
 
