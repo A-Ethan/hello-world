@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node{
-            label 'jnlp-slave'
+            label 'uhost'
         }
     }
     stages {
