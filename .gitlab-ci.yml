@@ -13,7 +13,7 @@ build:
   stage: build
   script:
     - mvn $MAVEN_CLI_OPTS package
-    - sudo docker build -t hello-image .
+    - sudo docker build -t uhub.ucloud.cn/gary/hello-image .
 
 test:
   stage: test
