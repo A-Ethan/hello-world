@@ -33,7 +33,7 @@ public class DemoApplication {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		return "Hello World Spring is here! 0927 2100 Server works at " + address + ":" +serverPort + "\n  " + request.getRemoteAddr();
+		return "Hello World Spring is here! 0927 1805 Server works at " + address + ":" +serverPort + "\n  " + request.getRemoteAddr();
 
 	}
 	@GetMapping("/")
