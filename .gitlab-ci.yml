@@ -8,7 +8,7 @@ cache:
     - .m2/repository/
     - target/
 
-build:
+buildToIntegraion:
   stage: build
   only:
     refs:
@@ -16,6 +16,7 @@ build:
   script:
     - mvn $MAVEN_CLI_OPTS package
     - sudo docker build -t uhub.ucloud.cn/gary/hello-image:SNAP-$CI_JOB_ID .
+
 
 buildToDeploy:
   stage: build
@@ -37,7 +38,10 @@ deployToIntegration:
       - develop
   stage: deploy
   script:
-    - ssh root@k8s kubectl get pod -n kube-system
+    - sudo docker push uhub.ucloud.cn/gary/hello-image:SNAP-$CI_JOB_ID
+    - cat  yaml/hello_world_template.yaml |sed 's/<IMAGE_TAG>/SNAP-$CI_JOB_ID/'  > /tmp/hello_world_SNAP-$CI_JOB_ID.yaml
+    - scp /tmp/hello_world_SNAP-$CI_JOB_ID.yaml root@k8s:/tmp/hello_world_SNAP-$CI_JOB_ID.yaml
+    - ssh root@k8s kubectl apply -f /tmp/hello_world_SNAP-$CI_JOB_ID.yaml
 
 deployToPre:
   only:
