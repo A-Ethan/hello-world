@@ -25,7 +25,17 @@ public class DemoApplication {
 		return this.serverPort;
 	}
 
+	@GetMapping("/hello")
+	String hello(HttpServletRequest request, HttpServletResponse response) {
+		String address = "";
+		try {
+			address =  InetAddress.getLocalHost().toString();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		return "Hello World Spring is here! 0927 2100 Server works at " + address + ":" +serverPort + "\n  " + request.getRemoteAddr();
 
+	}
 	@GetMapping("/")
 	String home(HttpServletRequest request, HttpServletResponse response) {
 		String address = "";
