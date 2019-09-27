@@ -21,7 +21,6 @@ buildToDeploy:
   stage: build
   only:
     - tags
-    - master
   script:
     - mvn $MAVEN_CLI_OPTS package
     - sudo docker build -t uhub.ucloud.cn/gary/hello-image:$CI_COMMIT_TAG .
@@ -43,7 +42,6 @@ deployToIntegration:
 deployToPre:
   only:
     - tags
-    - master
   stage: deploy
   script:
     - ssh root@k8s kubectl get pod
@@ -51,7 +49,6 @@ deployToPre:
 deployToProduct:
   only:
     - tags
-    - master
   stage: deploy
   when: manual
   script:
