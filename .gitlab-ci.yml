@@ -17,13 +17,15 @@ build:
     - mvn $MAVEN_CLI_OPTS package
     - sudo docker build -t uhub.ucloud.cn/gary/hello-image:SNAP-$CI_JOB_ID .
 
-buildToDeply:
+buildToDeploy:
+  stage: build
   only:
     - tags
     - master
   script:
     - mvn $MAVEN_CLI_OPTS package
     - sudo docker build -t uhub.ucloud.cn/gary/hello-image:$CI_COMMIT_TAG .
+
 test:
   stage: test
   script:
