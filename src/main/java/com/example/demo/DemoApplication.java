@@ -33,7 +33,7 @@ public class DemoApplication {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		return "<PRE>Hello World DevOps Demo\n\r Version 0928 0730 Server works at " + address + ":" +serverPort + "\n\r  RemoteAddress: " + request.getRemoteAddr()+ "</PRE>\n\r";
+		return "<PRE>Hello World DevOps Demo\n\r Version 0928 0745 Server works at " + address + ":" +serverPort + "\n\r  RemoteAddress: " + request.getRemoteAddr()+ "</PRE>\n\r";
 
 	}
 	@GetMapping("/")
