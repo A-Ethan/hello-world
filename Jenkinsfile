@@ -18,8 +18,10 @@ pipeline {
         }
 
         stage('BuildImage') {
-            build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-            sh "sudo docker build -t uhub.ucloud.cn/gary/helloword:${build_tag} ."
+            steps {
+                build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+                sh "sudo docker build -t uhub.ucloud.cn/gary/helloword:${build_tag} ."
+            }
         }
     }
 }
