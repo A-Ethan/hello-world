@@ -8,14 +8,15 @@ cache:
     - .m2/repository/
     - target/
 
-build:
+buildToIntegraion:
   stage: build
   only:
     refs:
       - develop
   script:
     - mvn $MAVEN_CLI_OPTS package
-    - sudo docker build -t uhub.ucloud.cn/gary/hello-image:SNAP-$CI_JOB_ID .
+    - sudo docker build -t uhub.ucloud.cn/gary/hello-image:SNAP-$CI_PIPELINE_ID .
+
 
 buildToDeploy:
   stage: build
@@ -24,7 +25,7 @@ buildToDeploy:
   script:
     - mvn $MAVEN_CLI_OPTS package
     - sudo docker build -t uhub.ucloud.cn/gary/hello-image:$CI_COMMIT_TAG .
-
+    - sudo docker push uhub.ucloud.cn/gary/hello-image:$CI_COMMIT_TAG
 test:
   stage: test
   script:
@@ -37,14 +38,19 @@ deployToIntegration:
       - develop
   stage: deploy
   script:
-    - ssh root@k8s kubectl get pod -n kube-system
+    - sudo docker push uhub.ucloud.cn/gary/hello-image:SNAP-$CI_PIPELINE_ID
+    - cat  yaml/hello_world_template.yaml |sed "s/<IMAGE_TAG>/SNAP-$CI_PIPELINE_ID/"  > /tmp/hello_world_SNAP-$CI_PIPELINE_ID.yaml
+    - scp /tmp/hello_world_SNAP-$CI_PIPELINE_ID.yaml root@k8s:/tmp/hello_world_SNAP-$CI_PIPELINE_ID.yaml
+    - ssh root@k8s kubectl apply -f /tmp/hello_world_SNAP-$CI_PIPELINE_ID.yaml
 
 deployToPre:
   only:
     - tags
   stage: deploy
   script:
-    - ssh root@k8s kubectl get pod
+    - cat  yaml/hello_world_template.yaml |sed "s/<IMAGE_TAG>/SNAP-$CI_COMMIT_TAG/"  > /tmp/hello_world_$CI_COMMIT_TAG.yaml
+    - scp /tmp/hello_world_$CI_COMMIT_TAG.yaml root@k8s:/tmp/hello_world_$CI_COMMIT_TAG.yaml
+    - ssh root@k8s kubectl apply -f /tmp/hello_world_$CI_COMMIT_TAG.yaml -n preproduction
 
 deployToProduct:
   only:
@@ -52,4 +58,6 @@ deployToProduct:
   stage: deploy
   when: manual
   script:
-    - ssh root@k8s kubectl get pod
+    - cat  yaml/hello_world_template.yaml |sed "s/<IMAGE_TAG>/SNAP-$CI_COMMIT_TAG/"  > /tmp/hello_world_$CI_COMMIT_TAG.yaml
+    - scp /tmp/hello_world_$CI_COMMIT_TAG.yaml root@k8s:/tmp/hello_world_$CI_COMMIT_TAG.yaml
+    - ssh root@k8s kubectl apply -f /tmp/hello_world_$CI_COMMIT_TAG.yaml -n production
