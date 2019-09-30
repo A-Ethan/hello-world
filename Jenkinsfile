@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node{
-            label 'uhost'
+            label 'SLAVE'
         }
     }
     stages {
@@ -19,10 +19,12 @@ pipeline {
 
         stage('BuildImage') {
             steps {
-                script {
-                    build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-                }
-                sh "sudo docker build -t uhub.ucloud.cn/gary/helloword:${build_tag} ."
+                     script {
+                         build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+                     }
+                     sh "export"
+                     sh "sudo docker build -t uhub.ucloud.cn/gary/helloword:${build_tag} ."
+                     sh "sudo docker push  uhub.ucloud.cn/gary/helloword:${build_tag} "
             }
         }
     }
