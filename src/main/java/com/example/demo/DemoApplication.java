@@ -1,9 +1,9 @@
 package com.example.demo;
 
-import io.micrometer.core.instrument.MeterRegistry;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.*;
-import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
+
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.annotation.Bean;
