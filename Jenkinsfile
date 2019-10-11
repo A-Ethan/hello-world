@@ -24,7 +24,7 @@ pipeline {
                      }
                      sh "export"
                      sh "sudo docker build -t uhub.ucloud.cn/gary/helloword:${build_tag} ."
-                     sh "sudo docker push  uhub.ucloud.cn/gary/helloword:${build_tag} "
+                     sh "echo sudo docker push  uhub.ucloud.cn/gary/helloword:${build_tag} "
             }
         }
     }
