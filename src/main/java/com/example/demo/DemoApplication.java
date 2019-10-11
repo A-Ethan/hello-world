@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -81,10 +82,12 @@ public class DemoApplication {
 		Timer t = new Timer();
 
 		t.scheduleAtFixedRate(new TimerTask() {
+			Random r = new Random();
 			@Override
 			public void run() {
-				jmx_bean.setAppCounter( jmx_bean.getAppCounter()+1);
-				jmx_bean.setRequestCounter( jmx_bean.getRequestCounter()+10);
+				jmx_bean.setAppCounter( jmx_bean.getAppCounter()+r.nextInt(5));
+
+				jmx_bean.setRequestCounter( jmx_bean.getRequestCounter()+10+r.nextInt(10));
 				jmx_bean.setSuccessCounter( jmx_bean.getAppCounter() + jmx_bean.getRequestCounter());
 			}
 		},1000, 2000);
