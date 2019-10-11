@@ -4,8 +4,8 @@ COPY target /usr/src/app
 COPY lib/jmx_prometheus_javaagent-0.12.0.jar /usr/src/app
 COPY yaml/javaagent.yaml /usr/src/app
 
-ENV PORT 5000
+ENV PORT 8080
 EXPOSE $PORT
-ENV JMXPORT 5000
+ENV JMXPORT 9090
 EXPOSE $JMXPORT
 CMD [ "sh", "-c", "java -javaagent:lib/jmx_prometheus_javaagent-0.12.0.jar=${JMXPORT}:yaml/javaagent.yaml   -jar /usr/src/app/demo-0.0.1-SNAPSHOT.jar -Dserver.port=${PORT}" ]
