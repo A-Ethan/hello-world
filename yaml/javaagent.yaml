@@ -30,4 +30,12 @@ rules:
     host: "$1"
   help: Tomcat session $3 total
   type: COUNTER
+- pattern: 'hello_bean.*(SuccessCounter|AppCounter|RequestCounter)'
+  name: hello_bean_$1_total
+  help: hello_bean $1 total
+  type: COUNTER
+- pattern: 'hello_bean.*(Appname)'
+  name: hello_bean_name
+  help: hello_bean $1 total
+  type: GAUGE
 - pattern: ".*"
