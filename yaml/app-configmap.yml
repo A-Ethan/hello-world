@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-application-properties
+data:
+  hello.properties: |
+    server.tomcat.accesslog.buffered=true
+    server.tomcat.accesslog.directory=/accesslog
+    server.tomcat.accesslog.enabled=true
+    server.tomcat.accesslog.pattern=combined
+    server.tomcat.accesslog.prefix=access_log
+    server.tomcat.accesslog.rename-on-rotate=false
+    server.tomcat.accesslog.request-attributes-enabled=false
+    server.tomcat.accesslog.rotate=true
+    server.tomcat.accesslog.suffix=.log

@@ -11,4 +11,5 @@ spec:
       ports:
       - containerPort: 8080
         protocol: TCP
-
+      - containerPort: 9090
+        protocol: TCP
