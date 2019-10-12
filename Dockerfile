@@ -8,4 +8,4 @@ ENV PORT 8080
 EXPOSE $PORT
 ENV JMXPORT 9090
 EXPOSE $JMXPORT
-CMD [ "sh", "-c", "java -javaagent:jmx_prometheus_javaagent-0.12.0.jar=${JMXPORT}:javaagent.yaml   -jar /usr/src/app/demo-0.0.1-SNAPSHOT.jar -Dserver.port=${PORT}" ]
+CMD [ "sh", "-c", "java -javaagent:jmx_prometheus_javaagent-0.12.0.jar=${JMXPORT}:javaagent.yaml   -jar /usr/src/app/demo-0.0.1-SNAPSHOT.jar -Dserver.port=${PORT} --spring.config.location=/etc/appconfig/hello.properties" ]
