@@ -23,6 +23,6 @@ public class DemoApplicationTests {
 	@Test
 	public void homeResponse() {
 		String body = this.restTemplate.getForObject("/", String.class);
-		assertThat(body).startsWith("Gary's Hello World Spring is here! 0716 2100");
+		assertThat(body).startsWith("Ethan's Hello World Spring is here! 0716 2100");
 	}
 }

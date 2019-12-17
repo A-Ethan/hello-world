@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: garyhelloworld
+  labels:
+     app: helloapp
+spec:
+  containers:
+    - name: helloappc
+      image: uhub.service.ucloud.cn/gary/hello-image:SNAP-155
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      - containerPort: 9090
+        protocol: TCP
+
