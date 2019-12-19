@@ -1,4 +1,4 @@
-FROM maven:3-jdk-8-alpine
+FROM uhub.service.ucloud.cn/hello/maven:3-jdk-8-alpine
 WORKDIR /usr/src/app
 COPY target /usr/src/app
 COPY lib/jmx_prometheus_javaagent-0.12.0.jar /usr/src/app
